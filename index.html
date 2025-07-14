@@ -66,6 +66,67 @@
       margin-top: 40px;
       color: #333;
     }
+    .tab-bar {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: transparent;
+    padding: 10px 20px 0 20px;
+  }
+
+  .tab {
+    padding: 8px 35px;
+    margin-right: -10px;
+    border-radius: 16px 16px 0 0;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 -2px 5px rgba(0,0,0,.25);
+    transition: 0.2s;
+    background-color: #edc3d2;
+    color: #ffffff;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .tab:nth-child(1) { background-color: #d8b9c5; }
+  .tab:nth-child(2) { background-color: #e2b3c4; }
+  .tab:nth-child(3) { background-color: #d99ab2; }
+  .tab:nth-child(4) { background-color: #c77f99; }
+  .tab:nth-child(5) { background-color: #b45177; }
+
+  .tab:hover {
+    background-color: #f4b1c8;
+  }
+
+  .tab.active {
+    background-color: #ffffff;
+      color: #6e0b38;
+    border-bottom: 2px solid transparent;
+    z-index: 2;
+  }
+
+  iframe#sheetFrame {
+    width: 95%;
+    height: 700px;
+    border: none;
+    margin: auto;
+    display: block;
+    border-top: 2px solid #ccc;
+  }
+
+  /* Responsive: ปรับขนาดแท็บบนมือถือ */
+  @media screen and (max-width: 600px) {
+    .tab {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+
+    iframe#sheetFrame {
+      height: 500px;
+    }
+  }
   </style>
 </head>
 <body>
@@ -89,7 +150,15 @@
     ตารางด้านล่าง ดูได้อย่างเดียว
   </P4><br>
 <!-- Embed Google Sheet -->
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?widget=true&amp;headers=false" width="100%" height="600" frameborder="0"></iframe>
+<div class="tab-bar">
+  <div class="tab active" onclick="switchTab(this, 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?gid=699000463&single=true')">ชั้น 3</div>
+  <div class="tab" onclick="switchTab(this, 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?gid=186159116&single=true')">ชั้น 4</div>
+  <div class="tab" onclick="switchTab(this, 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?gid=1867028106&single=true')">SIPH</div>
+  <div class="tab" onclick="switchTab(this, 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?gid=708866351&single=true')">พระศรี</div>
+  <div class="tab" onclick="switchTab(this, 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?gid=1788882604&single=true')">OUTSIDE</div>
+</div>
+
+<iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRhwlAufHp24jwS9RcL9aXiUhcwguZgEFqJBEerRnKDa-cQHr1uz2jqQHlYOQ9GFBmXz8bbCPifsV8c/pubhtml?gid=699000463&single=true"></iframe>
 
 <br><br>
     <div class="section-title">📘 คู่มือการใช้งาน (Manual)</div>
@@ -117,6 +186,12 @@
     </div>
 
   </div>
-
+<script>
+  function switchTab(tabElement, url) {
+    document.getElementById("sheetFrame").src = url;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tabElement.classList.add('active');
+  }
+</script>
 </body>
 </html>
